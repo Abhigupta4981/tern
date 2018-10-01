@@ -1,8 +1,3 @@
-'''
-Copyright (c) 2017-2018 VMware, Inc. All Rights Reserved.
-SPDX-License-Identifier: BSD-2-Clause
-'''
-
 from .origins import Origins
 
 class Image(object):
@@ -109,4 +104,10 @@ class Image(object):
         pass
 
     def to_dict(self):
-        return {}
+        d = {'name': self.name(),
+             'tag': self.tag(),
+             'manifest': self.manifest(),
+             'config': self.config(),
+             'layers': [layer.to_dict() for layer in self.layers()]
+            }
+        return d
